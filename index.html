@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Renter Aid Program — Staff Guidance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root {
+    --cyan: #05c3de;
+    --cyan-dark: #048aa0;
+    --cyan-soft: #e6f9fc;
+    --cyan-softer: #f3fcfd;
+    --paper: #fafaf7;
+    --paper-warm: #f5f3ed;
+    --ink: #1a2530;
+    --ink-soft: #4a5766;
+    --ink-muted: #5a6672;
+    --rule: #e4e2db;
+    --green: #2aab74;
+    --green-soft: #e8f8f2;
+    --amber: #FFA300;
+    --amber-soft: #fff4e0;
+    --navy: #236092;
+    --navy-soft: #e8eef4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: var(--paper);
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== STAGE ===== */
+  .stage {
+    width: 100vw; height: 100vh;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    background: var(--paper);
+    position: relative;
+  }
+
+  .stage::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 80% 20%, var(--cyan-softer) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 10% 90%, var(--paper-warm) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .stage::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='250'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
+    mix-blend-mode: multiply; opacity: 0.5;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    height: 11vh; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6vmin;
+    border-bottom: 0.15vmin solid var(--rule);
+    position: relative; z-index: 2;
+  }
+
+  .header-logo { height: 6.5vh; width: auto; }
+
+  .header-right {
+    display: flex; align-items: center; gap: 0.9vw;
+    font-size: 1.3vmin; font-weight: 700;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .pulse {
+    width: 0.7vw; height: 0.7vw;
+    background: var(--cyan); border-radius: 50%; flex-shrink: 0;
+    animation: ping 2.4s ease-out infinite;
+  }
+
+  @keyframes ping {
+    0%   { box-shadow: 0 0 0 0 rgba(5,195,222,0.65); }
+    100% { box-shadow: 0 0 0 1.5vw rgba(5,195,222,0); }
+  }
+
+  /* ===== MAIN ===== */
+  .main {
+    flex: 1;
+    display: flex; flex-direction: column;
+    padding: 2.2vh 6vmin 1.6vh 6vmin;
+    gap: 1.6vh;
+    position: relative; z-index: 2;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    flex-shrink: 0;
+    display: flex; flex-direction: column; gap: 0.7vh;
+    animation: fadeUp 0.7s 0.1s both cubic-bezier(0.22,1,0.36,1);
+  }
+
+  .staff-badge {
+    display: inline-flex; align-items: center; gap: 0.8vmin;
+    padding: 0.45vmin 1.1vmin;
+    background: var(--navy-soft); color: var(--navy);
+    border-radius: 10vmin; align-self: flex-start;
+    font-size: 1.05vmin; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+  }
+
+  .staff-badge svg { width: 1.3vmin; height: 1.3vmin; }
+
+  .hero-headline {
+    font-family: 'Fraunces', serif;
+    font-size: 3vw; font-weight: 700;
+    line-height: 1.0; letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+
+  .hero-headline em { font-style: italic; font-weight: 400; color: var(--cyan-dark); }
+
+  .hero-sub {
+    font-size: 1.7vmin; font-weight: 400;
+    line-height: 1.55; color: var(--ink-soft);
+    max-width: 70vw;
+  }
+
+  .hero-sub strong { font-weight: 600; color: var(--ink); }
+
+  /* ===== MIDDLE ROW: program card + two guidance cards ===== */
+  .middle-row {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1.9fr;
+    gap: 2vmin;
+    animation: fadeUp 0.7s 0.18s both cubic-bezier(0.22,1,0.36,1);
+  }
+
+  /* ── Shared card base ── */
+  .card {
+    background: #fff;
+    border: 0.1vmin solid var(--rule);
+    border-radius: 1.4vmin;
+    padding: 2.2vmin 2.5vmin 2vmin 2.8vmin;
+    display: flex; flex-direction: column;
+    gap: 1.3vmin;
+    position: relative;
+    box-shadow: 0 0.3vmin 2vmin rgba(26,37,48,0.06);
+    min-height: 0;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 0.5vmin; border-radius: 1.4vmin 0 0 1.4vmin;
+  }
+
+  .card.cyan::before  { background: var(--cyan); }
+  .card.navy::before  { background: var(--navy); }
+  .card.amber::before { background: var(--amber); }
+
+  .card-icon {
+    width: 4.5vmin; height: 4.5vmin; flex-shrink: 0;
+    border-radius: 50%;
+    display: grid; place-items: center;
+  }
+
+  .card.cyan  .card-icon { background: var(--cyan-soft);  color: var(--cyan-dark); }
+  .card.navy  .card-icon { background: var(--navy-soft);  color: var(--navy); }
+  .card.amber .card-icon { background: var(--amber-soft); color: #c07800; }
+  .card-icon svg { width: 2.2vmin; height: 2.2vmin; }
+
+  /* Icon + heading on same row for guidance cards */
+  .card-header-row {
+    display: flex; align-items: center; gap: 1.3vmin;
+    flex-shrink: 0;
+  }
+
+  .card-header-row .card-icon { flex-shrink: 0; }
+
+  .card-header-row .card-heading { margin: 0; }
+
+  .card-kicker {
+    flex-shrink: 0;
+    font-size: 1.1vmin; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .card-heading {
+    flex-shrink: 0;
+    font-family: 'Fraunces', serif;
+    font-size: 2.4vmin; font-weight: 600;
+    line-height: 1.15; letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .card-body {
+    flex: 1; min-height: 0;
+    font-size: 1.55vmin; line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  .card-body strong { font-weight: 600; color: var(--ink); }
+
+  .card-body ul {
+    margin-top: 0.5vmin;
+    padding-left: 1.8vmin;
+    display: flex; flex-direction: column; gap: 0.4vmin;
+  }
+
+  .tag-list {
+    flex-shrink: 0;
+    display: flex; flex-wrap: wrap; gap: 0.7vmin;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.4vmin 1.3vmin;
+    border-radius: 10vmin;
+    font-size: 1.1vmin; font-weight: 600; line-height: 1.4;
+  }
+
+  .tag.cyan  { background: var(--cyan-soft);  color: var(--cyan-dark); }
+  .tag.navy  { background: var(--navy-soft);  color: var(--navy); }
+  .tag.amber { background: var(--amber-soft); color: #c07800; }
+
+  /* ── Right panel: two guidance cards stacked ── */
+  .guidance-panel {
+    display: flex; flex-direction: column;
+    gap: 2vmin;
+    min-height: 0;
+  }
+
+  /* Guidance cards fill equal height */
+  .guidance-panel .card {
+    flex: 1;
+  }
+
+  /* Email link style inside card */
+  .email-link {
+    display: inline-flex; align-items: center; gap: 0.7vmin;
+    margin-top: 0.8vmin;
+    padding: 0.8vmin 1.4vmin;
+    background: var(--navy-soft);
+    border-radius: 0.8vmin;
+    font-size: 1.5vmin; font-weight: 700;
+    color: var(--navy);
+    text-decoration: none;
+    align-self: flex-start;
+  }
+
+  .email-link svg { width: 1.5vmin; height: 1.5vmin; flex-shrink: 0; }
+
+  .web-link {
+    display: inline-flex; align-items: center; gap: 0.7vmin;
+    margin-top: 0.8vmin;
+    padding: 0.8vmin 1.4vmin;
+    background: var(--cyan-soft);
+    border-radius: 0.8vmin;
+    font-size: 1.5vmin; font-weight: 700;
+    color: var(--cyan-dark);
+    text-decoration: none;
+    align-self: flex-start;
+  }
+
+  .web-link svg { width: 1.5vmin; height: 1.5vmin; flex-shrink: 0; }
+
+  /* ===== QR SECTION ===== */
+  .qr-section {
+    flex-shrink: 0;
+    display: flex; align-items: center; gap: 3.5vmin;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-dark) 100%);
+    border-radius: 1.4vmin;
+    padding: 1.6vmin 4vmin;
+    color: #fff;
+    box-shadow: 0 0.6vmin 3vmin rgba(5,195,222,0.25);
+    animation: fadeUp 0.7s 0.26s both cubic-bezier(0.22,1,0.36,1);
+  }
+
+  .qr-left {
+    flex: 1; display: flex; flex-direction: column; gap: 1vmin;
+  }
+
+  .qr-eyebrow {
+    font-size: 1.1vmin; font-weight: 700;
+    letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.8;
+  }
+
+  .qr-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 3vmin; font-weight: 600;
+    line-height: 1.1; letter-spacing: -0.01em;
+  }
+
+  .qr-desc {
+    font-size: 1.5vmin; opacity: 0.88; line-height: 1.45;
+    max-width: 55vw;
+  }
+
+  .qr-url {
+    display: inline-flex; align-items: center; gap: 0.7vmin;
+    font-size: 1.4vmin; font-weight: 700; opacity: 0.92;
+  }
+
+  .qr-url svg { width: 1.4vmin; height: 1.4vmin; flex-shrink: 0; }
+
+  .qr-divider {
+    width: 0.1vmin; background: rgba(255,255,255,0.3); align-self: stretch;
+  }
+
+  .qr-right {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.8vmin; flex-shrink: 0;
+  }
+
+  #qrcode { line-height: 0; flex-shrink: 0; }
+  #qrcode canvas, #qrcode img {
+    width: 9vmin !important; height: 9vmin !important;
+    border-radius: 0.8vmin; display: block;
+  }
+
+  .qr-cta {
+    font-size: 1.1vmin; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.8;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    height: 6vh; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6vmin;
+    border-top: 0.15vmin solid var(--rule);
+    background: rgba(245,243,237,0.6);
+    position: relative; z-index: 2;
+  }
+
+  .footer-left {
+    display: flex; align-items: center; gap: 1.5vmin;
+    font-size: 1.2vmin; font-weight: 700;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .footer-right {
+    font-size: 1.2vmin; font-weight: 500;
+    color: var(--ink-muted); letter-spacing: 0.04em;
+  }
+
+  .color-dots { display: inline-flex; gap: 0.5vmin; align-items: center; }
+  .color-dots span { width: 0.8vmin; height: 0.8vmin; border-radius: 50%; }
+  .color-dots span:nth-child(1) { background: var(--cyan); }
+  .color-dots span:nth-child(2) { background: var(--navy); }
+  .color-dots span:nth-child(3) { background: var(--amber); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(1.5vh); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- HEADER -->
+  <header class="header">
+    <img class="header-logo"
+      src="https://raw.githubusercontent.com/reneordona/homelessservices/0f9c5a48e54f9193594de9d44eb5ae2e60a2f0bb/HSBlogo.png"
+      alt="Homeless Services Bureau">
+    <div class="header-right">
+      <div class="pulse"></div>
+      <span>Renter Aid Program</span>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="staff-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Staff Guidance
+      </div>
+      <div class="hero-headline">Long Beach <em>Renter Aid Program</em></div>
+      <p class="hero-sub">
+        The following guidance is provided by the <strong>Public Affairs Office</strong> for staff who may be
+        approached by media or community members regarding this program.
+      </p>
+    </div>
+
+    <!-- MIDDLE ROW -->
+    <div class="middle-row">
+
+      <!-- Left: What the Program Provides -->
+      <div class="card cyan">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="card-kicker">About the Program</div>
+        <div class="card-heading">What the Program Provides</div>
+        <div class="card-body">
+          The Long Beach Renter Aid Program provides <strong>short-term financial assistance</strong>
+          to low-income renters at risk of losing their homes.<br><br>
+          Payments are made <strong>directly to landlords or utility companies.</strong>
+          Participants may also be connected to <strong>food assistance, healthcare,</strong>
+          and other essential services.<br><br>
+          The program prioritizes <strong>seniors (55+),</strong> households facing eviction,
+          and those impacted by income loss or federal benefit changes.
+        </div>
+        <div class="tag-list">
+          <span class="tag cyan">Rent Relief</span>
+          <span class="tag cyan">Utilities</span>
+          <span class="tag cyan">Support Services</span>
+        </div>
+      </div>
+
+      <!-- Right: two guidance cards stacked -->
+      <div class="guidance-panel">
+
+        <!-- Media Inquiries -->
+        <div class="card navy">
+          <div class="card-header-row">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 7l-7 5 7 5V7z"/>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+              </svg>
+            </div>
+            <div class="card-heading">Media Inquiries</div>
+          </div>
+          <div class="card-body">
+            If you are approached by a member of the media with questions about the Renter Aid Program
+            or requests to interview staff, please <strong>direct them to contact the Public Affairs Office.</strong>
+            You may let them know that a member of our team will respond <strong>by the end of the business day.</strong>
+          </div>
+          <a class="email-link" href="mailto:he-publicaffairs@longbeach.gov">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            he-publicaffairs@longbeach.gov
+          </a>
+        </div>
+
+        <!-- Community Inquiries -->
+        <div class="card amber">
+          <div class="card-header-row">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="card-heading">Community Inquiries</div>
+          </div>
+          <div class="card-body">
+            If community members looking for aid have questions about the program, please
+            <strong>direct them to the program website,</strong> where they can find information
+            on eligibility, the application process, and how to apply.
+          </div>
+          <a class="web-link" href="https://www.longbeach.gov/renteraid">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            longbeach.gov/renteraid
+          </a>
+        </div>
+
+      </div><!-- .guidance-panel -->
+
+    </div><!-- .middle-row -->
+
+    <!-- QR BAR -->
+    <div class="qr-section">
+      <div class="qr-left">
+        <div class="qr-eyebrow">Public-Facing Program Website</div>
+        <div class="qr-heading">Share this with community members.</div>
+        <div class="qr-desc">Direct anyone seeking assistance to our website for full program details, eligibility requirements, and the application in their preferred language.</div>
+  
+      </div>
+      <div class="qr-divider"></div>
+      <div class="qr-right">
+        <div id="qrcode"></div>
+        <div class="qr-cta">Public Website</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-left">
+      <div class="color-dots"><span></span><span></span><span></span></div>
+      <span>Homeless Services Bureau — City of Long Beach</span>
+    </div>
+    <div class="footer-right">For internal staff use only</div>
+  </footer>
+
+</div>
+
+<script>
+  function buildQR() {
+    var qrSize = Math.round(window.innerWidth * 0.09);
+    document.getElementById('qrcode').innerHTML = '';
+    new QRCode(document.getElementById('qrcode'), {
+      text: 'https://www.longbeach.gov/homelessness/homeless-services/RenterAid/',
+      width: qrSize, height: qrSize,
+      colorDark: '#1a2530', colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  }
+  buildQR();
+  window.addEventListener('resize', buildQR);
+</script>
+</body>
+</html>
