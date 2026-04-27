@@ -209,7 +209,7 @@
 
   .card-body {
     flex: 1; min-height: 0;
-    font-size: 1.55vmin; line-height: 1.65;
+    font-size: 1.85vmin; line-height: 1.65;
     color: var(--ink-soft);
   }
 
@@ -306,7 +306,7 @@
   }
 
   .qr-desc {
-    font-size: 1.5vmin; opacity: 0.88; line-height: 1.45;
+    font-size: 1.75vmin; opacity: 0.88; line-height: 1.45;
     max-width: 55vw;
   }
 
@@ -328,7 +328,7 @@
 
   #qrcode { line-height: 0; flex-shrink: 0; }
   #qrcode canvas, #qrcode img {
-    width: 9vmin !important; height: 9vmin !important;
+    width: 12vmin !important; height: 12vmin !important;
     border-radius: 0.8vmin; display: block;
   }
 
@@ -406,14 +406,18 @@
 
       <!-- Left: What the Program Provides -->
       <div class="card cyan">
-        <div class="card-icon">
+
+
+          <div class="card-header-row">
+            <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
             <polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
-        </div>
-        <div class="card-kicker">About the Program</div>
+
+            </div>
         <div class="card-heading">What the Program Provides</div>
+          </div>
         <div class="card-body">
           The Long Beach Renter Aid Program provides <strong>short-term financial assistance</strong>
           to low-income renters at risk of losing their homes.<br><br>
@@ -486,7 +490,6 @@
     <!-- QR BAR -->
     <div class="qr-section">
       <div class="qr-left">
-        <div class="qr-eyebrow">Public-Facing Program Website</div>
         <div class="qr-heading">Share this with community members.</div>
         <div class="qr-desc">Direct anyone seeking assistance to our website for full program details, eligibility requirements, and the application in their preferred language.</div>
   
