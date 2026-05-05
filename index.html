@@ -209,7 +209,7 @@
 
   .card-body {
     flex: 1; min-height: 0;
-    font-size: 1.85vmin; line-height: 1.65;
+    font-size: 1.55vmin; line-height: 1.65;
     color: var(--ink-soft);
   }
 
@@ -264,16 +264,42 @@
 
   .email-link svg { width: 1.5vmin; height: 1.5vmin; flex-shrink: 0; }
 
+  .contact-row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.8vmin;
+    margin-top: 0.8vmin;
+  }
+
+  .email-pill {
+    display: inline-flex; align-items: center; gap: 0.7vmin;
+    padding: 0.8vmin 1.4vmin;
+    background: var(--green-soft);
+    border-radius: 0.8vmin;
+    font-size: 1.5vmin; font-weight: 700;
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  .email-pill svg { width: 1.5vmin; height: 1.5vmin; flex-shrink: 0; }
+
+  .phone-pill {
+    display: inline-flex; align-items: center; gap: 0.7vmin;
+    padding: 0.8vmin 1.4vmin;
+    background: var(--amber-soft);
+    border-radius: 0.8vmin;
+    font-size: 1.5vmin; font-weight: 700;
+    color: #c07800;
+  }
+
+  .phone-pill svg { width: 1.5vmin; height: 1.5vmin; flex-shrink: 0; }
+
   .web-link {
     display: inline-flex; align-items: center; gap: 0.7vmin;
-    margin-top: 0.8vmin;
     padding: 0.8vmin 1.4vmin;
     background: var(--cyan-soft);
     border-radius: 0.8vmin;
     font-size: 1.5vmin; font-weight: 700;
     color: var(--cyan-dark);
     text-decoration: none;
-    align-self: flex-start;
   }
 
   .web-link svg { width: 1.5vmin; height: 1.5vmin; flex-shrink: 0; }
@@ -306,7 +332,7 @@
   }
 
   .qr-desc {
-    font-size: 1.75vmin; opacity: 0.88; line-height: 1.45;
+    font-size: 1.5vmin; opacity: 0.88; line-height: 1.45;
     max-width: 55vw;
   }
 
@@ -328,7 +354,7 @@
 
   #qrcode { line-height: 0; flex-shrink: 0; }
   #qrcode canvas, #qrcode img {
-    width: 12vmin !important; height: 12vmin !important;
+    width: 9vmin !important; height: 9vmin !important;
     border-radius: 0.8vmin; display: block;
   }
 
@@ -406,18 +432,14 @@
 
       <!-- Left: What the Program Provides -->
       <div class="card cyan">
-
-
-          <div class="card-header-row">
-            <div class="card-icon">
+        <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
             <polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
-
-            </div>
+        </div>
+        <div class="card-kicker">About the Program</div>
         <div class="card-heading">What the Program Provides</div>
-          </div>
         <div class="card-body">
           The Long Beach Renter Aid Program provides <strong>short-term financial assistance</strong>
           to low-income renters at risk of losing their homes.<br><br>
@@ -477,17 +499,20 @@
             <strong>direct them to the program website,</strong> where they can find information
             on eligibility, the application process, and how to apply.
           </div>
-          <a class="web-link" href="https://www.longbeach.gov/renteraid" style="display:inline !important;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            longbeach.gov/renteraid
-          </a>
-          <a class="email-link" href="mailto:LBRenterAid@longbeach.gov" style="display:inline !important;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            LBRenterAid@longbeach.gov
-          </a>
-          <a class="web-link" href="https://www.longbeach.gov/renteraid" style="display:inline !important;">
-            562.570.4500 (Every Thu 9-5pm)
-          </a>
+          <div class="contact-row">
+            <a class="web-link" href="https://www.longbeach.gov/renteraid">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              longbeach.gov/renteraid
+            </a>
+            <a class="email-pill" href="mailto:LBRenterAid@longbeach.gov">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              LBRenterAid@longbeach.gov
+            </a>
+            <div class="phone-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+              562.570.4500 &nbsp;·&nbsp; Mon–Thu, 9–5pm
+            </div>
+          </div>
         </div>
 
       </div><!-- .guidance-panel -->
@@ -497,9 +522,13 @@
     <!-- QR BAR -->
     <div class="qr-section">
       <div class="qr-left">
+        <div class="qr-eyebrow">Public-Facing Program Website</div>
         <div class="qr-heading">Share this with community members.</div>
         <div class="qr-desc">Direct anyone seeking assistance to our website for full program details, eligibility requirements, and the application in their preferred language.</div>
-  
+        <div class="qr-url">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          longbeach.gov/homelessness/homeless-services/RenterAid
+        </div>
       </div>
       <div class="qr-divider"></div>
       <div class="qr-right">
